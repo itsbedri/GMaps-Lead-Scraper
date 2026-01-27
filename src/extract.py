@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from common.logger import logger
 
 filename = "leads.csv"
 query = input("Enter your search query (e.g., 'Restaurants in Istanbul'): ")
@@ -32,7 +33,7 @@ def main():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     url = "https://www.google.com/maps?hl=en"
-    print("Opening Google Maps...")
+    logger.info(f"Navigating to {url}")
     driver.get(url)
 
 
@@ -40,7 +41,7 @@ def main():
     search_box = None
 
     try:
-        print("Locating the search box...")
+        logger.info("Waiting for the search box to be present...")
         search_box = wait.until(
             EC.presence_of_element_located((By.NAME, "q"))
         )
@@ -50,19 +51,19 @@ def main():
         search_box.send_keys(search_query)
         search_box.send_keys(Keys.ENTER)
 
-        print("Waiting for search results to load...")
+        logger.info("Waiting for search results to load...")
 
         time.sleep(5)  # wait for results to load
 
 
-        print("scrolling down the results...")
+        logger.info("scrolling down the results...")
         scrollable_div_xpath = wait.until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "div[role='feed']")
             )
         )
 
-        print("Scrolling down...")
+        logger.info("Scrolling down...")
         for i in range(10):  # scroll 10 times
             driver.execute_script(
                 "arguments[0].scrollTop = arguments[0].scrollHeight",
@@ -71,8 +72,7 @@ def main():
             time.sleep(2)  # wait for new results to load
 
         
-        print("Extracting data...")
-
+        logger.info("Extracting data...")
         cards = driver.find_elements(By.CSS_SELECTOR, "div[role='article']")
         data = []
 
@@ -89,7 +89,7 @@ def main():
                 print(f"Error extracting data from a card: {e}")
                 continue
             
-            print('\n\n Extracting phone number from detail page...')
+            logger.info(f"Extracting phone number from detail page for {name}...")
             
         enriched_data = []
 
@@ -98,8 +98,7 @@ def main():
             link = row[1]
 
             phone_num = extract_phone_num(driver, link)
-            print(f"found phone number: {phone_num} for {name}")
-
+            logger.info(f"Found phone number: {phone_num} for {name}")
         
             enriched_data.append([name, link, phone_num])
 
@@ -109,11 +108,11 @@ def main():
             writer.writerow(["Name", "Link", "Phone Number"])
             writer.writerows(enriched_data)
 
-        print(f"Data saved to {filename}")
+        logger.info(f"Data saved to {filename}")
 
         input("Press Enter to close the browser...")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         input("Error encountered. Press Enter to close the browser...")
 
     finally:
