@@ -35,3 +35,6 @@ you can check it in leads.csv file, to get a grasp of how the info is stored
    ```bash
    git clone [https://github.com/itsbedri/GMaps-Lead-Scraper.git](https://github.com/itsbedri/GMaps-Lead-Scraper.git)
    cd GMaps-Lead-Scraper
+
+⚠️ Disclaimer
+This project is for educational and portfolio purposes only. Please respect Google's robots.txt policy and Terms of Service. Do not use this tool for large-scale commercial scraping without permission.
