@@ -13,8 +13,8 @@ This tool automates the process of generating B2B leads from Google Maps. Unlike
 
 It solves the "Infinite Scroll" problem by programmatically manipulating the DOM to load hundreds of results before extraction begins.
 
-![Demo Result](demo_results.png)
-*(Screenshot of the generated leads.csv output)*
+![Demo Result]
+you can check it in leads.csv file, to get a grasp of how the info is stored
 
 ##  Key Features
 - ** Infinite Scrolling Engine:** Automatically detects the scrollable feed and forces Google Maps to load 50-100+ results (bypassing the initial 20-item limit).
