@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from search import search_mech
+from scraper import scrape_all
 
 URL = "https://www.google.com/maps?hl=en"
 search_query = input("Enter your search query (e.g., 'Restaurants in Istanbul'): ")
@@ -28,7 +28,7 @@ def main():
     driver.get(URL)
 
     wait = WebDriverWait(driver, 10)
-    
+
 
     search_mech(driver, search_query, wait)
 
