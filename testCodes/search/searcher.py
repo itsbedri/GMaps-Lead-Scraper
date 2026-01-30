@@ -42,8 +42,8 @@ try:
 
     try:
         search_box = wait.until(
-        EC.presence_of_element_located((By.ID, "searchboxinput"))
-    )
+            EC.presence_of_element_located((By.ID, "searchboxinput"))
+        )
     except:
         pass
 
@@ -64,7 +64,6 @@ try:
         except:
             pass
 
-
     if search_box:
         print("Search box located.")
         search_query = "Eiffel Tower"
@@ -77,8 +76,6 @@ try:
         print("❌ Search box not found. by ID, NAME, or TAG_NAME.")
         print("Search box not found.")
         raise Exception("Search box not found.")
-
-
 
     print("Waiting for search results to load...")
     time.sleep(5)  # wait for results to load
