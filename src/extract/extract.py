@@ -7,9 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from common.logger import logger
 
-filename = "leads.csv"
+filename = input("Enter the filename (e.g., 'leads.csv': ")
 query = input("Enter your search query (e.g., 'Restaurants in Istanbul'): ")
 
 
