@@ -1,15 +1,17 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+from operation import scrape_all
 from common import logger
-from scraper import scrape_all
 
 URL = "https://www.google.com/maps?hl=en"
 search_query = input("Enter your search query (e.g., 'Restaurants in Istanbul'): ")
-filename = input("Enter the filename (e.g., 'leads.csv': ")
+filename = input("Enter the filename (e.g., 'leads.csv'): ")
 
 
 def intialize_driver_func():
